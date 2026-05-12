@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Text Classification & IR System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-icon">
+                <i class="fas fa-heartbeat"></i>
+            </div>
+            <h1>Medical Transcription Analysis </h1>
+            <p class="subtitle">Healthcare NLP Pipeline using Naive Bayes and TF-IDF</p>
+        </header>
+
+        <!-- Input Section -->
+        <section class="input-section">
+            <div class="input-card">
+                <label for="medical-text">
+                    <i class="fas fa-stethoscope"></i>
+                    Enter Medical Query
+                </label>
+                <textarea 
+                    id="medical-text" 
+                    placeholder="Enter medical symptoms, diagnosis, or healthcare text..."
+                    rows="5"
+                ></textarea>
+                <button id="analyze-btn" class="analyze-btn">
+                    <i class="fas fa-microscope"></i>
+                    Analyze Text
+                </button>
+            </div>
+        </section>
+
+        <!-- Loading Spinner -->
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Processing your query...</p>
+        </div>
+
+        <!-- Output Section -->
+        <section id="output-section" class="output-section hidden">
+            
+            <!-- Predicted Category Card -->
+            <div class="output-card fade-in">
+                <h3><i class="fas fa-tags"></i> Predicted Category</h3>
+                <div id="category-badge" class="category-badge">
+                    <span id="category-text">-</span>
+                </div>
+            </div>
+
+            <!-- Query Expansion -->
+            <div class="output-card fade-in">
+                <h3><i class="fas fa-expand-arrows-alt"></i> Query Expansion (WordNet)</h3>
+                <div id="expanded-terms" class="terms-container">
+                    <!-- Terms will be inserted here -->
+                </div>
+            </div>
+
+            <!-- Top Retrieved Documents -->
+            <div class="output-card fade-in">
+                <h3><i class="fas fa-file-medical"></i> Top Retrieved Documents</h3>
+                <div id="retrieved-docs" class="docs-container">
+                    <!-- Documents will be inserted here -->
+                </div>
+            </div>
+
+            <!-- NLP Statistics Panel -->
+            <div class="output-card fade-in">
+                <h3><i class="fas fa-chart-line"></i> NLP Statistics</h3>
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <div class="metric-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="metric-info">
+                            <span class="metric-label">Perplexity</span>
+                            <span id="perplexity-value" class="metric-value">-</span>
+                        </div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-icon accuracy">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <div class="metric-info">
+                            <span class="metric-label">Accuracy</span>
+                            <span id="accuracy-value" class="metric-value">-</span>
+                        </div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-icon f1">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <div class="metric-info">
+                            <span class="metric-label">F1 Score</span>
+                            <span id="f1-value" class="metric-value">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Confusion Matrix Section -->
+            <div class="output-card fade-in">
+                <h3><i class="fas fa-th"></i> Confusion Matrix</h3>
+                <div id="confusion-matrix" class="matrix-container">
+                    <!-- Matrix will be rendered here -->
+                </div>
+                <div class="matrix-legend">
+                    <span><span class="legend-color low"></span> Low</span>
+                    <span><span class="legend-color medium"></span> Medium</span>
+                    <span><span class="legend-color high"></span> High</span>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
